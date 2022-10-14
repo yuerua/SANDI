@@ -1,7 +1,5 @@
 # SANDI: Self-supervised learning for antigen detection on multiplex images
 
-----
-
 The scripts for implementing and validating the SANDI pipeline.
 
 ## Installation
@@ -18,8 +16,6 @@ The scripts for implementing and validating the SANDI pipeline.
   conda env create -f env_gpu.yml
   conda activate SANDI_gpu
   ```
-
----
 
 ## Implementation
 
