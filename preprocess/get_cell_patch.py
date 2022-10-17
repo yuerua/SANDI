@@ -8,7 +8,7 @@ from util.Patches import Patches
 from util.data_utils import encode
 from util.progressbar import printProgressBar
 import tensorflow as tf
-from tensorflow.python.keras import backend as K
+from tensorflow.keras import backend as K
 import random
 from util.move_file import test_split
 from preprocess.npy_to_im import npy_to_im

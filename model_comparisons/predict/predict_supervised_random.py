@@ -17,8 +17,8 @@ import random
 random.seed(655)
 
 import numpy as np
-from tensorflow.python.keras.models import Model
-from tensorflow.python.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
 
 
 def get_supervised_classifier(input_shape, num_class):

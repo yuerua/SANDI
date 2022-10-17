@@ -15,7 +15,7 @@ import platform
 if platform.system() == 'Darwin':
     matplotlib.use('MacOSX')
 
-from tensorflow.python.keras.models import Model
+from tensorflow.keras.models import Model
 
 import random
 random.seed(655)

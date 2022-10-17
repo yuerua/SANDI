@@ -22,9 +22,9 @@ random.seed(655)
 
 import tensorflow as tf
 import numpy as np
-from tensorflow.python.keras.models import Model
-from tensorflow.python.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
-from tensorflow.python.keras.layers import concatenate
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
+from tensorflow.keras.layers import concatenate
 
 
 def get_similarity_model():

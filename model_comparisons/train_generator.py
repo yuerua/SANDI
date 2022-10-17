@@ -8,13 +8,14 @@ import numpy as np
 
 from tensorflow import keras
 from tensorflow.keras import layers
+
 from tensorflow.keras.layers.experimental import preprocessing
 
 # from dataset import prepare_dataset
 # from augmentations import RandomResizedCrop, RandomColorJitter
-from algorithms import SimCLR, MoCo, DINO
-from generator import generator
-from models import get_feature_encoder, get_feature_encoder_sequential
+from model_comparisons.algorithms import SimCLR, MoCo, DINO
+from model_comparisons.generator import generator
+from model_comparisons.models import get_feature_encoder, get_feature_encoder_sequential
 
 tf.get_logger().setLevel("WARN")  # suppress info-level logs
 
@@ -160,11 +161,11 @@ for data_i in range(len(model_name_list)):
 
         if os.path.exists(os.path.join(data_dir, train_data_filename + '_info.npy')):
             param = np.load(os.path.join(data_dir, train_data_filename + '_info.npy'), allow_pickle=True)
-            train_num_examples = param.item()['num_examples']
+            train_num_examples = param.take(0)['num_examples']
             steps_per_epoch = int(np.ceil(train_num_examples / batch_size)) * int(mini_batch)
 
             param = np.load(os.path.join(data_dir, valid_data_filename + '_info.npy'), allow_pickle=True)
-            valid_num_examples = param.item()['num_examples']
+            valid_num_examples = param.take(0)['num_examples']
             validation_steps = int(np.ceil(valid_num_examples / batch_size)) * int(mini_batch)
 
         else:

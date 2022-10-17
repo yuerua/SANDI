@@ -62,7 +62,7 @@ if __name__ == '__main__':
                       'myeloma': sorted(["CD8", "CD4", "FOXP3+CD4+"]),
                       'IMC_immune_CD4_CD8': sorted(["Th", "Tc"])}
 
-    for dataset_name in dataset_list:
+    for dataset_name in ['ova_t']:
 
         if dataset_name in ['hypoxia_fop_fon']:
             slide_ext = ".svs"

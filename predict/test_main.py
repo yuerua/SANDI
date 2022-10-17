@@ -15,7 +15,6 @@ if platform.system() == 'Darwin':
     matplotlib.use('MacOSX')
 
 import random
-random.seed(655)
 from train.model import get_similarity_model
 from util.plot import tsne_represent, put_markers
 from util.get_batch import get_im_batch, get_slide_batch
@@ -25,7 +24,7 @@ from util.save_test_cell_patches import save_cell_patches_from_npy
 from util.evaluate import evaluate
 from util.Patches import Patches
 from util.get_dissimilar_set import get_dissimilar_set
-
+random.seed(655)
 
 class Test(object):
     def __init__(self,

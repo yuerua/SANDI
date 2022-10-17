@@ -2,16 +2,16 @@ import os
 import numpy as np
 
 import tensorflow as tf
-from tensorflow.python.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping
-from tensorflow.python.keras.optimizers import Adam, SGD
+from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger, EarlyStopping
+from tensorflow.keras.optimizers import Adam, SGD
 
 from train.model import get_similarity_model, get_supervised_classifier
 from train.loss import Loss
 from train.generator import generator
-from tensorflow.python.keras.losses import binary_crossentropy, categorical_crossentropy
+from tensorflow.keras.losses import binary_crossentropy, categorical_crossentropy
 from glob import glob
 from sklearn.model_selection import train_test_split
-from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from util.Patches import Patches
 from sklearn.preprocessing import OneHotEncoder
@@ -19,6 +19,8 @@ from sklearn.preprocessing import OneHotEncoder
 if os.name == 'nt':
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
+tf.compat.v1.experimental.output_all_intermediates(True)
 
 class Train:
 
@@ -89,12 +91,12 @@ class Train:
         # Optimizer
         if self.optimizer_type == 'adam':
             print("Using Adam as optimizer")
-            opt_ = Adam(lr=self.lr)
+            opt_ = Adam(learning_rate=self.lr)
         else:
             #decay = lr / num_of_epoch
             print("Using SGD as optimizer")
             decay = 10**(-6)
-            opt_ = SGD(lr=self.lr, momentum=0.9, decay=decay, nesterov=False)
+            opt_ = SGD(learning_rate=self.lr, momentum=0.9, decay=decay, nesterov=False)
 
         model.compile(optimizer=opt_, loss=self.loss_, metrics=["accuracy"])
 

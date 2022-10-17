@@ -4,7 +4,7 @@ import tensorflow as tf
 def similar_sample(data_in, sub_patch_size):
     # data_in = tf.transpose(data_in, perm=[3, 0, 1, 2])
 
-    data = tf.map_fn(lambda img: tf.random_crop(img, (sub_patch_size, sub_patch_size, 3)), data_in)
+    data = tf.map_fn(lambda img: tf.image.random_crop(img, (sub_patch_size, sub_patch_size, 3)), data_in)
     # data = tf.map_fn(lambda img: tf.image.random_flip_left_right(img), data)
     # data = tf.map_fn(lambda img: tf.image.random_flip_up_down(img), data)
     # img_patch = tf.random_crop(data_in, (self.sub_patch_size, self.sub_patch_size, 3))

@@ -13,8 +13,8 @@ The scripts for implementing and validating the SANDI pipeline.
 - Create an environment and install the required libraries
 
   ```bash
-  conda env create -f env_gpu.yml
-  conda activate SANDI_gpu
+  conda env create -f SANDI_tf2.6.yml
+  conda activate SANDI_tf2.6
   ```
 
 ## Implementation

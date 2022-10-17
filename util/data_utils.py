@@ -28,22 +28,22 @@ def encode(in_feat, labels):
 
 def decode(serialized_example):
     # To read the names of features:  head -n10 /path/to/tfrecords
-    features = tf.parse_single_example(
+    features = tf.io.parse_single_example(
         serialized_example,
         features={
-            'in_feat/shape': tf.FixedLenFeature([3], tf.int64),  # [3]: 3rows; shape of data, eg. (224,224,3)
-            'in_feat/data': tf.FixedLenFeature([], tf.string),
-            'labels/shape': tf.FixedLenFeature([1], tf.int64),
-            'labels/data': tf.FixedLenFeature([], tf.string)
+            'in_feat/shape': tf.io.FixedLenFeature([3], tf.int64),  # [3]: 3rows; shape of data, eg. (224,224,3)
+            'in_feat/data': tf.io.FixedLenFeature([], tf.string),
+            'labels/shape': tf.io.FixedLenFeature([1], tf.int64),
+            'labels/data': tf.io.FixedLenFeature([], tf.string)
         })
 
-    in_feat = tf.decode_raw(features['in_feat/data'], tf.uint8)  # Change this to uint16 or unit8
+    in_feat = tf.io.decode_raw(features['in_feat/data'], tf.uint8)  # Change this to uint16 or unit8
     # Change img to int32, with shape matching the input shape
     in_feat = tf.reshape(in_feat, tf.cast(features['in_feat/shape'], tf.int32))
     # Normalization
     in_feat = tf.divide(tf.cast(in_feat, tf.float32), 255.0)  # 65535 #normalize
 
-    labels = tf.decode_raw(features['labels/data'], tf.uint8)
+    labels = tf.io.decode_raw(features['labels/data'], tf.uint8)
     labels = tf.reshape(labels, tf.cast(features['labels/shape'], tf.int32))
     labels = tf.cast(labels, tf.float32)
     return in_feat, labels

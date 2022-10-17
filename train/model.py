@@ -1,8 +1,7 @@
 import tensorflow as tf
-from tensorflow.python.keras.models import Model
-from tensorflow.python.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
-from tensorflow.python.keras.layers import concatenate
-import numpy as np
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, MaxPool2D, Activation, Flatten, Dense, Dropout, Lambda
+from tensorflow.keras.layers import concatenate
 
 def get_similarity_model(input_shape, loss_type):
     img_in = Input(shape = input_shape, name = 'FeatureNet_ImageInput')

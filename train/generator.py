@@ -1,11 +1,12 @@
-# Created by hzhang at 03/12/2020
-# Description: generate pairs of patches with auto assigned label
+# Description: generate pairs of patches with pair-wise label
 
 import os
 import tensorflow as tf
-from tensorflow.python.keras import backend as K
+# from tensorflow.keras import backend as K
 from util.data_utils import decode
 from util.data_transform import similar_sample, augment
+
+tf.compat.v1.disable_eager_execution()
 
 class generator(object):
 	def __init__(self, opts):
@@ -70,7 +71,7 @@ class generator(object):
 			output = [label_class_merge, label]
 
 		while True:
-			yield K.get_session().run(([data_a, data_b], output))
+			yield tf.compat.v1.keras.backend.get_session().run(([data_a, data_b], output))
 			#print(label_class_merge.eval(session = K.get_session()))
 
 	def generate_subset(self, type_, subset_size):
@@ -82,7 +83,7 @@ class generator(object):
 		if type_ == "t":
 			data = augment(data)
 		while True:
-			yield K.get_session().run((data, label_class))
+			yield tf.compat.v1.keras.backend.get_session().run((data, label_class))
 
 	def get_data_set(self, filename, shuffle_size, batch_size, prefetch_buffer):
 		data_set = tf.data.TFRecordDataset(filename)
@@ -108,7 +109,7 @@ class generator(object):
 				batch_size=self.batch_size,
 				prefetch_buffer=self.batch_size * 2)
 
-		iterator = dataset.make_one_shot_iterator()
+		iterator = tf.compat.v1.data.make_one_shot_iterator(dataset) #dataset.make_one_shot_iterator()
 		data = iterator.get_next()
 
 		return data
@@ -141,7 +142,7 @@ class generator(object):
 				prefetch_buffer=self.batch_size * 2,
 			    subset_size=subset_size)
 
-		iterator = dataset.make_one_shot_iterator()
+		iterator = tf.compat.v1.data.make_one_shot_iterator(dataset) #dataset.make_one_shot_iterator()
 		data = iterator.get_next()
 
 		return data

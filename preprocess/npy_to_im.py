@@ -1,6 +1,6 @@
 import os
 from glob import glob
-import pandas as pd
+# import pandas as pd
 from skimage import io as sio
 import numpy as np
 from util.Patches import Patches
