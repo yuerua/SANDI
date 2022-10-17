@@ -1,8 +1,8 @@
 import os
 from glob import glob
 import numpy as np
-import skimage.io as sio
-import pandas as pd
+# import skimage.io as sio
+# import pandas as pd
 import math
 from shutil import copyfile, rmtree
 

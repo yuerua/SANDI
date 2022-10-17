@@ -5,9 +5,7 @@ import skimage.io as sio
 import pandas as pd
 import math
 from shutil import copyfile, rmtree
-
 import time
-
 import matplotlib.pyplot as plt
 import matplotlib
 import platform
@@ -28,13 +26,13 @@ random.seed(655)
 
 class Test(object):
     def __init__(self,
-        test_npy_path = '/Users/hzhang/Documents/project/SANDI/dataset/hypoxia/data/data_20_4_no_none/test/all',
-        ref_img_path = "/Users/hzhang/Documents/project/SANDI/dataset/hypoxia/ref_img/cap_can/r5",
-        results_dir = '../results/cap_auto_r5',
+        test_npy_path = '../ExpDir/ova_t/data/test/',
+        ref_img_path = "../ExpDir/ova_t/ref_img/",
+        results_dir = '../results/ova_t/auto_r',
         slide_ext = '.svs',
         # Network settings
-        model_dir = '/Users/hzhang/Documents/project/SANDI/dataset/hypoxia/code/model/hypoxia_can_cap_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3',
-        model_name = 'hypoxia_can_cap_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0042.h5',
+        model_dir = '../ExpDir/ova_t/model/',
+        model_name = 'ova_t_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0100.h5',
         loss_type = "combined",
         # patch settings
         patch_size = 28,
@@ -50,7 +48,7 @@ class Test(object):
         opt_test_size=0.002,
         save_test_img = False, #convert npy to cell patch imgs?
         save_pred_patch = False,
-        color_code_f='/Users/hzhang/Documents/project/siamese/pdl1_pred/ovarian_pdl1.csv',
+        color_code_f='../ExpDir/ova_t/ovarian_color.csv',
 
         automatic_ref_npy_path = "",
         automatic_rounds=0,
@@ -237,75 +235,3 @@ class Test(object):
                                                                  diff_only = False, save_ref = True)
 
         self.ref_img_path = ref_img_path_auto
-
-
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-
-
-    if predict_mode:
-        pre_slide = sorted(glob(os.path.join(csv_path, '*' + slide_ext)))
-
-        for slide in pre_slide:
-            slide_name = os.path.basename(slide)
-            slide_name = os.path.splitext(slide_name)[0]
-            csv_fs = sorted(glob(os.path.join(slide, 'Da*.csv')))
-
-            for csv_f in csv_fs:
-                csv = pd.read_csv(csv_f)
-                im_name = os.path.splitext(os.path.basename(csv_f))[0]
-                im_f = os.path.join(cws_path, slide_name, im_name + '.jpg')
-                im = sio.imread(im_f)
-
-                cell_patches, labels = get_im_batch(im, csv, patch_size)
-
-                if np.max(cell_patches) > 1:
-                    cell_patches = cell_patches.astype('float32') / 255.
-
-                # generate ref dataset
-                ref_patches, ref_labels = get_ref(cell_classes, ref_no)
-
-                print('Validating reference set')
-                pre_labels_ref, pre_score_ref, pre_batch_score_ref = \
-                    get_output_ref(ref_patches, ref_labels, ref_patches, ref_labels)
-
-                pre_batch_score_ref = np.reshape(pre_batch_score_ref, (-1, ref_labels.shape[0], patch_no ** 2))
-
-                print('Predicting for', im_name)
-                start_time = time.time()
-                pre_labels, pre_score, pre_batch_score, pre_distance = \
-                    get_output_predict(cell_patches, ref_patches, ref_labels)
-
-                output_obj = {'cell_patches': cell_patches, 'ref_labels': ref_labels, \
-                              'pre_labels': pre_labels, 'pre_score': pre_score, \
-                              'pre_batch_score': pre_batch_score, 'pre_distance': pre_distance}
-
-
-                pre_im = put_markers(csv, im, pre_labels)
-                if os.path.exists(os.path.join(save_path, slide_name)) is False:
-                    os.makedirs(os.path.join(save_path, slide_name))
-                print("--- Completed for %s ---"% im_name)
-                print("labels:", np.unique(pre_labels, return_counts=True)[0].tolist())
-                print("counts:", np.unique(pre_labels, return_counts=True)[1].tolist())
-                csv.iloc[:,0] = pre_labels.tolist()
-                csv.to_csv(os.path.join(save_path, slide_name, im_name + '.csv'),index=False)
-                sio.imsave(os.path.join(save_path, slide_name, im_name + '.jpg'), pre_im)
-                np.save(os.path.join(save_path, slide_name, im_name + '.npy'), output_obj, allow_pickle=True)
-                print("--- %s seconds ---" % (time.time() - start_time))
-                if save_pred_patch:
-                    save_cell_patches_predict(cell_patches, slide_name, im_name, pre_labels)
-
-                if get_tsne:
-                    tsne_fig,features = tsne_represent(cell_patches, pre_labels, n_iter=500)
-                    tsne_fig.savefig(os.path.join(save_path, slide_name, im_name+ '_tsne.png'))
-                    np.save(os.path.join(save_path, slide_name, im_name + '_features.npy'), features)
-                    plt.clf()

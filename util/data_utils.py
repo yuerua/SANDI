@@ -27,7 +27,7 @@ def encode(in_feat, labels):
 
 
 def decode(serialized_example):
-    # To read the names of features:  head -n10 /path/to/tfrecords
+
     features = tf.io.parse_single_example(
         serialized_example,
         features={

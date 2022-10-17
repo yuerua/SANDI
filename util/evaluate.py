@@ -1,12 +1,10 @@
-# Created by hzhang at 19/04/2021
-# Description:
-from sklearn import svm
+# Description: Evaluating functions
+
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 import seaborn as sns
 import pandas as pd
 import numpy as np
-
 
 import matplotlib.pyplot as plt
 import matplotlib
@@ -25,10 +23,6 @@ def evaluate(labels, pre_labels):
 
     acc = correct_no / len(pre_labels)
     print('Accuracy:', acc)
-
-    # np.unique(labels[incorrect_idx], return_counts=True)
-    # np.unique(np.array(pre_labels)[incorrect_idx], return_counts=True)
-    # np.unique(labels, return_counts=True)
 
     # confusion matrix
     cr_m = classification_report(labels, pre_labels, digits=4,  output_dict=True)
@@ -65,9 +59,6 @@ def report_cm_by_class(cm, cell_classes):
         df_by_class.loc[c] = [cell_classes[c], TP, TN, FP, FN, sensitivity, specificity, precision, f1_score, support]
 
     return df_by_class
-        
-        
-
 
 
 def test_cell_pairs(im_0, im_1, model, patch_obj, patch_no, loss_type):

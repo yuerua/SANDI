@@ -1,8 +1,7 @@
-# Created by hzhang at 19/04/2021
-# Description:
+# Description: Extract single cell images from tiles
 import os
 import numpy as np
-from glob import glob
+# from glob import glob
 
 def get_im_batch(im, csv, patch_size, patch_obj):
     cell_list = []

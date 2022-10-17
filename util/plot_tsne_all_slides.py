@@ -1,11 +1,8 @@
-import numpy as np
 import os
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 import platform
 import seaborn as sns
-import cv2
 from sklearn.manifold import TSNE
 if platform.system() == 'Darwin':
     matplotlib.use('MacOSX')
@@ -24,17 +21,10 @@ def tsne_represent(features, labels, n_iter=500):
 
     tsne_features = tsne_obj.fit_transform(features)
 
-    #merge_pixel = np.reshape(cell_patches,(cell_patches.shape[0], -1))
-    #tsne_features = tsne_obj.fit_transform(merge_pixel)
-
-    #cell_classes = np.unique(labels).tolist()
-    #colors = plt.cm.rainbow(np.linspace(0, 1, len(cell_classes)))
-    #print(plt.cm.cmap_d.keys())
     cell_classes = np.unique(labels)
     colors = plt.get_cmap('twilight')(np.linspace(0, 1, len(cell_classes)))
 
     f = plt.figure(figsize=(10, 8))
-    # ax = f.add_subplot(1, 1)
     for idex, (c_color, c_label) in enumerate(zip(colors, cell_classes)):
         plt.scatter(tsne_features[np.where(labels == c_label), 0],
                     tsne_features[np.where(labels == c_label), 1],
@@ -52,42 +42,13 @@ def tsne_represent(features, labels, n_iter=500):
     plt.ylabel('Dimension 2')
     plt.title('t-SNE on Testing Samples')
     plt.legend(loc='best')
-    #plt.pause(5)
-
     return f
 
 if __name__ == "__main__":
 
-    #Ovarian PDL1
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_pdl1_050622_best/results/pdl1_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0098/auto_ref_1/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_pdl1_050622_best/results/pdl1_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0098/"
-    # slide_ext = ".ndpi"
-
-    #IMC_CD4_CD8
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/IMC_immune_CD4_CD8/results/IMC_immune_CD4_CD8_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_097/auto_ref/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/IMC_immune_CD4_CD8/results/IMC_immune_CD4_CD8_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_097/"
-    # slide_ext = ".ndpi"
-
-    #Ova T
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_t/results/ova_t_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0100/auto_ref_best/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_t/results/ova_t_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0100/"
-    # slide_ext = ".ndpi"
-
-    #LUSC T
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/lusc_t/results/lusc_t_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_090_new/auto_ref_3/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/lusc_t/results/lusc_t_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_090_new/"
-    # slide_ext = ".ndpi"
-
-    #hypoxia_cap_can
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_cap_can/results/hypoxia_cap_can_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_059/auto_ref_3/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_cap_can/results/hypoxia_cap_can_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_059/"
-    # slide_ext = ".svs"
-
-    #hypoxia_fop_fon
-    # input_dir = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_fop_fon/results/hypoxia_fop_fon_unsuper_b_256_opt_adam_contrast_only_ratio_0.7_0.3_094/auto_ref_3/r9"
-    # save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_fop_fon/results/hypoxia_fop_fon_unsuper_b_256_opt_adam_contrast_only_ratio_0.7_0.3_094/"
-    # slide_ext = ".svs"
-
+    input_dir = "../ExpDir/ova_t/auto_ref_1/r9"
+    save_path = "../plots/ova_t"
+    slide_ext = ".ndpi"
 
     slide_list = [i for i in os.listdir(input_dir) if i.endswith(slide_ext)]
     feature_all = []

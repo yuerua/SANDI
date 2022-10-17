@@ -140,6 +140,6 @@ def plot_confusion_matrix(df_cm):
     return hm
     
 if __name__ == "__main__":
-    csv = pd.read_csv("/Users/hzhang/Documents/project/SANDI/dataset/SANDI/ExpDir/ova_t_try/model/ova_t_try_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3/train_hist.csv")
-    plot_training_curves_from_csv("/Users/hzhang/Documents/project/SANDI/dataset/SANDI/ExpDir/ova_t_try/model/ova_t_try_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3", csv, "try", "combined")
-    max(csv.epoch)
+    csv = pd.read_csv("train_hist.csv")
+    plot_training_curves_from_csv("../plots", csv, "try", "combined")
+    # max(csv.epoch)

@@ -1,5 +1,4 @@
-# Created by hzhang at 19/04/2021
-# Description:
+# Description: find the cell image with the largest distance to the reference
 import numpy as np
 import os
 import skimage.io as sio
@@ -41,7 +40,7 @@ def get_dissimilar_set(pre_labels, pre_distance, cell_patches, labels, cell_clas
         for add_i in add_idx:
             add_im = patch_obj.merge_patches(np.zeros((patch_size, patch_size,3)), cell_patches[add_i])
             add_im = (add_im*255.).astype('uint8')
-            #Caution!!! gt label is put at the tail
+            #i_pred_gt.png
             save_add_f = os.path.join(save_path, "ref_%i_%s_%s.png"%(add_i, pre_labels[add_i], labels[add_i]))
             sio.imsave(save_add_f, add_im)
 

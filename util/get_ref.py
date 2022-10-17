@@ -1,8 +1,6 @@
-# Created by hzhang at 19/04/2021
-# Description:
+# Description: Get references
 import random
 import numpy as np
-from glob import glob
 import os
 import skimage.io as sio
 import re

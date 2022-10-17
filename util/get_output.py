@@ -1,9 +1,7 @@
-# Created by hzhang at 19/04/2021
-# Description:
+# Description: Generate predictions
 
 import numpy as np
 from sklearn.metrics.pairwise import pairwise_distances
-from sklearn import svm
 from tensorflow.python.keras.models import Model
 from glob import glob
 import os
@@ -12,7 +10,6 @@ from sklearn.metrics import classification_report
 from sklearn import svm
 import math
 import skimage.io as sio
-import seaborn as sns
 from util.Patches import Patches
 
 class Output(object):
@@ -50,7 +47,7 @@ class Output(object):
 
 
         self.patch_pairs = [[x, y] for x in range(self.patch_no) for y in range(self.patch_no)]
-        self.input_shape=(self.sub_patch_size, self.sub_patch_size,3)
+        self.input_shape=(self.sub_patch_size, self.sub_patch_size, 3)
         self.patch_pairs = np.transpose(np.array(self.patch_pairs)).tolist()
 
 

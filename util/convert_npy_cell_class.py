@@ -21,11 +21,11 @@ def convert_cell_class(npy_fs, cell_classes_map, save_path):
             np.save(save_f, [data, labels])
 
 if __name__ == "__main__":
-    npy_fs = glob(os.path.join("/Users/hzhang/Documents/project/SANDI/dataset/gal8/npy/data_20_4/test", "*.ndpi"))
+    npy_fs = glob(os.path.join("../test", "*.ndpi"))
     cell_classes_map = {"pastatWeak":"pstat",
                         "pstatModerate":"pstat",
                         "pstatStrong":"pstat"}
 
-    save_path = "/Users/hzhang/Documents/project/SANDI/dataset/gal8/npy/data_20_4/no_intensity/test"
+    save_path = "../test_convert_class"
 
     convert_cell_class(npy_fs, cell_classes_map, save_path)

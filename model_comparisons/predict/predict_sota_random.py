@@ -6,7 +6,6 @@ from sklearn.manifold import TSNE
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 import csv
-
 import seaborn as sns
 
 import matplotlib.pyplot as plt
@@ -16,13 +15,10 @@ if platform.system() == 'Darwin':
     matplotlib.use('MacOSX')
 
 from tensorflow.keras.models import Model
-
 import random
-random.seed(655)
-
 import numpy as np
-
 from tensorflow import keras
+random.seed(655)
 
 
 def get_features(model, cell_patches):

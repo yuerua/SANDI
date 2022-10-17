@@ -153,7 +153,7 @@ if __name__ == '__main__':
 			  'batch_size': 100,
 			  'supervised': False,
 			  'loss_type': "combined",
-			  'data_dir': '/Users/hzhang/Documents/project/siamese/sota_comparison/supervised_SimCLR/ova_t/data/random_valid_without_test_with_labels',
+			  'data_dir': '../ExpDir/ova_t/data',
 			  'train_data_filename': 'train',
 			  'valid_data_filename': 'valid'
 			  }

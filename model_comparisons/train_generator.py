@@ -20,34 +20,16 @@ from model_comparisons.models import get_feature_encoder, get_feature_encoder_se
 tf.get_logger().setLevel("WARN")  # suppress info-level logs
 
 
-model_dir = './model'
-# model_name = 'SimCLR_ova_t'
-
-
-
-# model_name_list = ['SimCLR_ova_t','SimCLR_ova_pdl1', 'SimCLR_lusc_t', 'SimCLR_hypoxia_fop_fon', "SimCLR_hypoxia_cap_can",
-#                    'myeloma', 'gal8_no_intensity']
-
-# model_name_list = ['MoCo_ova_t','MoCo_ova_pdl1', 'MoCo_lusc_t', 'MoCo_hypoxia_fop_fon', "MoCo_hypoxia_cap_can",
-#                    'MoCo_myeloma', 'MoCo_gal8_no_intensity']
-
-model_name_list = ["SimCLR_IMC_immune_CD4_CD8"]
+model_dir = '../ExpDir/'
+model_name_list = ["ova_t_SimCLR"]
 
 
 initial_epoch = 0
 num_of_epoch = 100
 patch_size = 28
 sub_patch_size = 20
-# data_dir = '/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_t/data'
-# data_dir_list = ["/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_t/data",
-#                 "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/ova_pdl1/data",
-#                  "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/lusc_t/data",
-#                  "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_fop_fon/data",
-#                  "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/hypoxia_cap_can/data",
-#                  "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/myeloma/data",
-#                  "/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/gal8_no_intensity/data"]
 
-data_dir_list = ["/Users/hzhang/Documents/project/SANDI/SANDI/ExpDir/IMC_immune_CD4_CD8/data"]
+data_dir_list = ["../ExpDir/ova_t/data"]
 
 Algorithm = SimCLR
 train_data_filename = 'train'

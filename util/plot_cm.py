@@ -135,27 +135,10 @@ def plot_confusion_matrix(df_cm):
     return hm
     
 if __name__ == "__main__":
-    # csv = pd.read_csv("/Users/hzhang/Documents/project/SANDI/dataset/SANDI/ExpDir/ova_t_try/model/ova_t_try_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3/train_hist.csv")
-    # plot_training_curves_from_csv("/Users/hzhang/Documents/project/SANDI/dataset/SANDI/ExpDir/ova_t_try/model/ova_t_try_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3", csv, "try", "combined")
-    # max(csv.epoch)
 
-    save_path = "/Users/hzhang/Documents/project/SANDI/SANDI/manuscript/plots/confusion_matrix"
-    # dataset_name = "ovarian_t"
-    # df_cm = pd.read_csv("/Users/hzhang/Documents/project/SANDI/sota_comparison/bce_con_combine/ova_t/results_auto_ref/r10/ova_t_unsuper_b_256_opt_adam_combined_ratio_0.700000_0.300000_0100/all_cm.csv",\
-    #                     sep="\t", index_col=0)
-    #
-    # dataset_name = "lusc_t"
-    # df_cm = pd.read_csv("/Users/hzhang/Documents/project/SANDI/sota_comparison/bce_con_combine/lung_t_4class/results_get_ref/r9/lung_t_4class_unsuper_b_256_opt_adam_combined_ratio_0.7_0.3_0100/all_cm.csv",\
-    #                     sep="\t", index_col=0)
-
+    save_path = "../plots/confusion_matrix"
     dataset_name = "myeloma"
-    df_cm = pd.read_csv("/Users/hzhang/Documents/project/SANDI/SANDI/manuscript/plots/confusion_matrix/myeloma/cm_all.csv",\
-                        sep=",", index_col=0)
-
-    dataset_name = "myeloma"
-    df_cm = pd.read_csv("/Users/hzhang/Documents/project/SANDI/SANDI/manuscript/plots/confusion_matrix/myeloma/cm_all.csv",\
-                        sep=",", index_col=0)
-
+    df_cm = pd.read_csv("../plots/confusion_matrix/myeloma/cm_all.csv", sep=",", index_col=0)
 
     hm = plot_confusion_matrix(df_cm)
 

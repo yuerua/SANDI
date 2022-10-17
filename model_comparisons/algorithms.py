@@ -1,3 +1,4 @@
+#Modified from https://github.com/beresandras/contrastive-classification-keras/
 import tensorflow as tf
 
 from tensorflow import keras

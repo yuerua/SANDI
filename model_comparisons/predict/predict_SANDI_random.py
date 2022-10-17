@@ -1,21 +1,17 @@
 import os
 from glob import glob
 import pandas as pd
-
 from sklearn import svm
 from sklearn.manifold import TSNE
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 import csv
-
 import seaborn as sns
-
 import matplotlib.pyplot as plt
 import matplotlib
 import platform
 if platform.system() == 'Darwin':
     matplotlib.use('MacOSX')
-
 
 import random
 random.seed(655)

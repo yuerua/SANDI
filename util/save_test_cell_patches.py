@@ -1,5 +1,3 @@
-# Created by hzhang at 19/04/2021
-# Description:
 import skimage.io as sio
 import os
 import pandas as pd

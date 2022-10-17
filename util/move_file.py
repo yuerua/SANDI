@@ -1,4 +1,3 @@
-# Created by hzhang at 16/04/2021
 # Description: functions for sorting files
 import os
 from glob import glob
